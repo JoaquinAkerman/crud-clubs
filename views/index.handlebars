@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Club Management System</title>
+  </head>
+  <body>
+    <h1>Listado de equipos</h1>
+    <ul>
+      {{#each clubs}}
+      <li>
+        <a href="/clubes/{{this.id}}">{{this.name}}</a>
+      </li>
+      {{/each}}
+    </ul>
+
+    <h2>Agregar un nuevo equipo</h2>
+    <form action="/clubes" method="post" enctype="multipart/form-data">
+      <label for="name">Nombre:</label>
+      <input type="text" name="name"><br>
+      <label for="shortName">Nombre corto:</label>
+      <input type="text" name="shortName"><br>
+      <label for="tla">Siglas:</label>
+      <input type="text" name="tla"><br>
+      <label for="crestUrl">URL del escudo:</label>
+      <input type="file" name="crestUrl"><br>
+      <label for="address">Dirección:</label>
+      <input type="text" name="address"><br>
+      <label for="phone">Teléfono:</label>
+      <input type="text" name="phone"><br>
+      <label for="website">Sitio web:</label>
+      <input type="text" name="website"><br>
+      <label for="email">Correo electrónico:</label>
+      <input type="text" name="email"><br>
+      <label for="founded">Año de fundación:</label>
+      <input type="text" name="founded"><br>
+      <label for="clubColors">Colores del club:</label>
+      <input type="text" name="clubColors"><br>
+      <label for="venue">Estadio:</label>
+      <input type="text" name="venue"><br>
+      <button type="submit">Agregar</button>
+    </form>
+  </body>
+</html>
