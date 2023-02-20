@@ -10,10 +10,10 @@
       rel='stylesheet'
       href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'
     />
-    <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    <h1>Club Management System PAG ACTUAL</h1>
+    
+    <h1>Club Management System</h1>
     <table>
       <thead>
         <tr>
@@ -24,20 +24,20 @@
         </tr>
       </thead>
       <tbody>
-        {{#each clubes}}
+        {{#each clubs}}
           <tr>
             <td>{{name}}</td>
             <td><img src='{{crestUrl}}' alt='{{name}}' /></td>
             <td>{{address}}</td>
             <td>
-              <a href='/clubes/{{id}}'>View</a>
-              <a href='/clubes/edit/{{id}}'>Edit</a>
-              <a href='/clubes/delete/{{id}}'>Delete</a>
+              <a href='/clubs/{{id}}'>View</a>
+              <a href='/clubs/edit/{{id}}'>Edit</a>
+              <a href='/clubs/delete/{{id}}'>Delete</a>
             </td>
           </tr>
         {{/each}}
       </tbody>
     </table>
-    <a href='/clubes/create'>Create New Club</a>
+    <a href='/clubs/create'>Create New Club</a>
   </body>
 </html>
