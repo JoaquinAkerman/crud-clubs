@@ -17,9 +17,9 @@
     <p><strong>Club colors:</strong> {{club.clubColors}}</p>
     <p><strong>Venue:</strong> {{club.venue}}</p>
 
-    <div id="map"></div>
+    <div id="map" style="width: 400px; height: 400px;">
 
-    <script>
+      <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 16,
@@ -34,5 +34,8 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhVsgsI5u9FHf50GT3DVZKEeF4RuzZKMo&callback=initMap" async defer></script>
+    </div>
+
+    
   </body>
 </html>

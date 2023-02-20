@@ -79,7 +79,7 @@ app.post('/clubs/new', (req, res) => {
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     const clubs = JSON.parse(data);
-    const club = {
+    const newClub = {
       id: uuidv4(),
       name: req.body.name,
       shortName: req.body.shortName,
@@ -94,7 +94,7 @@ app.post('/clubs/new', (req, res) => {
       venue: req.body.venue,
       lastUpdated: new Date().toISOString(),
     };
-    clubs.push(club);
+    clubs.push(newClub);
     fs.writeFile('clubs.json', JSON.stringify(clubs), (err) => {
       if (err) throw err;
       res.redirect('/');
@@ -103,6 +103,8 @@ app.post('/clubs/new', (req, res) => {
 });
 
 // setting up the route to process the editing of an existing club
+// this does not work
+
 app.post('/clubs/edit/:id', (req, res) => {
   const id = req.params.id;
   consoleLog('Updating the club with id:', id);
