@@ -1,10 +1,7 @@
 [
   {
     "id": 57,
-    "area": {
-      "id": 2072,
-      "name": "England"
-    },
+    "area": { "id": 2072, "name": "England" },
     "name": "Arsenal FC",
     "shortName": "Arsenal",
     "tla": "ARS",
@@ -16,6 +13,8 @@
     "founded": 1886,
     "clubColors": "Red / White",
     "venue": "Emirates Stadium",
+    "latitude": 51.554621,
+    "longitude": -0.108359,
     "lastUpdated": "2020-05-14T02:41:34Z"
   },
   {
@@ -32,6 +31,8 @@
     "founded": 1872,
     "clubColors": "Claret / Sky Blue",
     "venue": "Villa Park",
+    "latitude": 52.509498,
+    "longitude": -1.884718,
     "lastUpdated": "2020-05-14T02:41:36Z"
   },
   {
@@ -48,6 +49,8 @@
     "founded": 1905,
     "clubColors": "Royal Blue / White",
     "venue": "Stamford Bridge",
+    "latitude": 51.481583,
+    "longitude": -0.191042,
     "lastUpdated": "2020-05-14T02:41:41Z"
   },
   {
@@ -64,6 +67,8 @@
     "founded": 1878,
     "clubColors": "Blue / White",
     "venue": "Goodison Park",
+    "latitude": 53.4389,
+    "longitude": -2.9668,
     "lastUpdated": "2020-05-14T02:41:42Z"
   },
   {
@@ -80,6 +85,8 @@
     "founded": 1892,
     "clubColors": "Red / White",
     "venue": "Anfield",
+    "latitude": 53.4308,
+    "longitude": -2.9609,
     "lastUpdated": "2020-05-14T02:41:46Z"
   },
   {
@@ -96,6 +103,8 @@
     "founded": 1880,
     "clubColors": "Sky Blue / White",
     "venue": "Etihad Stadium",
+    "latitude": 53.4831,
+    "longitude": -2.2002,
     "lastUpdated": "2020-05-14T02:41:49Z"
   },
   {
@@ -112,6 +121,8 @@
     "founded": 1878,
     "clubColors": "Red / White",
     "venue": "Old Trafford",
+    "latitude": 53.4631,
+    "longitude": -2.2913,
     "lastUpdated": "2020-05-14T02:41:51Z"
   },
   {
@@ -128,6 +139,8 @@
     "founded": 1881,
     "clubColors": "Black / White",
     "venue": "St. James' Park",
+    "latitude": 54.9731,
+    "longitude": -1.6178,
     "lastUpdated": "2020-05-14T02:41:53Z"
   },
   {
@@ -144,6 +157,8 @@
     "founded": 1902,
     "clubColors": "Yellow / Green",
     "venue": "Carrow Road",
+    "latitude": 52.6204,
+    "longitude": 1.2983,
     "lastUpdated": "2020-05-14T02:41:54Z"
   },
   {
@@ -160,6 +175,8 @@
     "founded": 1882,
     "clubColors": "Navy Blue / White",
     "venue": "Tottenham Hotspur Stadium",
+    "latitude": 51.6032,
+    "longitude": -0.0667,
     "lastUpdated": "2020-05-14T02:42:01Z"
   },
   {
@@ -176,6 +193,8 @@
     "founded": 1877,
     "clubColors": "Black / Gold",
     "venue": "Molineux Stadium",
+    "latitude": 52.5908,
+    "longitude": -2.1303,
     "lastUpdated": "2020-05-14T02:42:06Z"
   },
   {
@@ -192,6 +211,8 @@
     "founded": 1881,
     "clubColors": "Claret / Sky Blue",
     "venue": "Turf Moor",
+    "latitude": 53.7898,
+    "longitude": -2.2303,
     "lastUpdated": "2020-05-14T02:42:11Z"
   },
   {
@@ -208,6 +229,8 @@
     "founded": 1884,
     "clubColors": "Royal Blue / White",
     "venue": "King Power Stadium",
+    "latitude": 52.6204,
+    "longitude": -1.1428,
     "lastUpdated": "2020-05-14T02:42:16Z"
   },
   {
@@ -224,6 +247,8 @@
     "founded": 1885,
     "clubColors": "Red / White / Black",
     "venue": "St. Mary's Stadium",
+    "latitude": 50.9057,
+    "longitude": -1.4044,
     "lastUpdated": "2020-05-14T02:42:17Z"
   },
   {
@@ -240,6 +265,8 @@
     "founded": 1881,
     "clubColors": "Yellow / Black",
     "venue": "Vicarage Road Stadium",
+    "latitude": 51.6565,
+    "longitude": -0.3903,
     "lastUpdated": "2020-05-14T02:42:25Z"
   },
   {
@@ -256,6 +283,8 @@
     "founded": 1905,
     "clubColors": "Red / Blue",
     "venue": "Selhurst Park",
+    "latitude": 51.3985,
+    "longitude": -0.0871,
     "lastUpdated": "2020-05-14T02:42:33Z"
   },
   {
@@ -272,6 +301,8 @@
     "founded": null,
     "clubColors": "Red / White / Black",
     "venue": "Bramall Lane",
+    "latitude": 53.3811,
+    "longitude": -1.4701,
     "lastUpdated": "2020-05-14T02:42:36Z"
   },
   {
@@ -288,6 +319,8 @@
     "founded": 1898,
     "clubColors": "Blue / White",
     "venue": "The American Express Community Stadium",
+    "latitude": 50.8608,
+    "longitude": -0.0847,
     "lastUpdated": "2020-05-14T02:43:01Z"
   },
   {
@@ -304,6 +337,8 @@
     "founded": 1895,
     "clubColors": "Claret / Sky Blue",
     "venue": "London Stadium",
+    "latitude": 51.5385,
+    "longitude": 0.0163,
     "lastUpdated": "2020-05-14T02:43:12Z"
   },
   {
@@ -320,6 +355,8 @@
     "founded": 1890,
     "clubColors": "Red / Black",
     "venue": "Vitality Stadium",
+    "latitude": 50.7354,
+    "longitude": -1.8382,
     "lastUpdated": "2020-05-14T02:43:14Z"
   }
 ]
