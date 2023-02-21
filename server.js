@@ -3,15 +3,30 @@ const handlebars = require('express-handlebars');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
+
 const app = express();
 
-//import all the functions from the controller
+// import all the functions from the controller
 const clubsController = require('./controllers/clubsController');
+const clubsDataBase = JSON.parse(fs.readFileSync('./clubs.json', 'utf-8'));
 
-let clubsDataBase = JSON.parse(fs.readFileSync('./clubs.json', 'utf-8'));
+function checkIfIdExists(id, dataBase) {
+  const club = dataBase.find((obj) => obj.id === id);
+  return !!club;
+}
+
 function consoleLog(parameter) {
-  console.log(parameter + 'ejecuted ');
+  console.log(`${parameter} ejecuted `);
+}
+
+function generateId(dataBase) {
+  let id;
+  do {
+    const bytes = crypto.randomBytes(4);
+    id = bytes.readUInt32BE(0).toString();
+  } while (checkIfIdExists(id, dataBase));
+  return id; // return a unique id
 }
 
 app.engine(
@@ -37,15 +52,15 @@ app.get('/', (req, res) => {
     });
 });
 
-//Setting up the route to display the form for creating a new club
+// Setting up the route to display the form for creating a new club
 app.get('/clubs/new', (req, res) => {
   consoleLog('create a new club');
   res.render('new');
 });
 // Setting up the route to display a particular club
 app.get('/clubs/:id', (req, res) => {
-  consoleLog(' show a particular club');
-  const id = req.params.id;
+  consoleLog(` showing club ${req.params.id}`);
+  const { id } = req.params;
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     const clubs = JSON.parse(data);
@@ -58,20 +73,20 @@ app.get('/clubs/:id', (req, res) => {
   });
 });
 
-//Setting up the route to display the form for editing an existing club
+// Setting up the route to display the form for editing an existing club
 app.get('/clubs/edit/:id', async (req, res) => {
-  console.log('show the form for editing an existing club');
+  consoleLog(`show the form for editing club ${req.params.id}`);
   try {
-    const id = parseInt(req.params.id); // convert string to number
-    const club = clubsDataBase.find((obj) => obj.id === id);
+    const { id } = req.params; // convert string to number
+    const club = clubsDataBase.find((obj) => obj.id == id);
     res.render('edit', { club });
   } catch (err) {
     console.error(err);
-    res.status(500).send('error to show the form for editing an existing club');
+    res.status(500).send(`error to show the form for editing club whit id${req.params.id}`);
   }
 });
 
-//////////////////////POST////////////////////////
+/// ///////////////////POST////////////////////////
 
 // Config of the route to process the creation of a new club
 app.post('/clubs/new', (req, res) => {
@@ -80,7 +95,7 @@ app.post('/clubs/new', (req, res) => {
     if (err) throw err;
     const clubs = JSON.parse(data);
     const newClub = {
-      id: uuidv4(),
+      id: generateId(clubs),
       name: req.body.name,
       shortName: req.body.shortName,
       tla: req.body.tla,
@@ -89,7 +104,7 @@ app.post('/clubs/new', (req, res) => {
       phone: req.body.phone,
       website: req.body.website,
       email: req.body.email,
-      founded: parseInt(req.body.founded),
+      founded: req.body.founded,
       clubColors: req.body.clubColors,
       venue: req.body.venue,
       lastUpdated: new Date().toISOString(),
@@ -103,11 +118,10 @@ app.post('/clubs/new', (req, res) => {
 });
 
 // setting up the route to process the editing of an existing club
-// this does not work
 
 app.post('/clubs/edit/:id', (req, res) => {
-  const id = req.params.id;
-  consoleLog('Updating the club with id:', id);
+  const { id } = req.params;
+  consoleLog(`Updating the club with id:${id}`);
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     const clubs = JSON.parse(data);
@@ -122,7 +136,7 @@ app.post('/clubs/edit/:id', (req, res) => {
       club.phone = req.body.phone;
       club.website = req.body.website;
       club.email = req.body.email;
-      club.founded = parseInt(req.body.founded);
+      club.founded = req.body.founded;
       club.clubColors = req.body.clubColors;
       club.venue = req.body.venue;
       club.lastUpdated = new Date().toISOString();
@@ -140,11 +154,11 @@ app.post('/clubs/edit/:id', (req, res) => {
 app.post('/eliminar/:id', (req, res) => {
   consoleLog(' process the deletion of an existing club');
 
-  const id = req.params.id;
+  const { id } = req.params;
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     let clubs = JSON.parse(data);
-    clubs = clubs.filter((c) => c.id != id);
+    clubs = clubs.filter((c) => c.id !== id);
     fs.writeFile('clubs.json', JSON.stringify(clubs), (err) => {
       if (err) throw err;
       res.redirect('/');
