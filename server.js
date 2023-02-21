@@ -7,8 +7,6 @@ const crypto = require('crypto');
 
 const app = express();
 
-// import all the functions from the controller
-const clubsController = require('./controllers/clubsController');
 const clubsDataBase = JSON.parse(fs.readFileSync('./clubs.json', 'utf-8'));
 
 function checkIfIdExists(id, dataBase) {

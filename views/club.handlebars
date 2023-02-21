@@ -1,42 +1,50 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8' />
     <title>{{club.name}}</title>
   </head>
   <body>
     <h1>{{club.name}}</h1>
-    <img src="{{club.crestUrl}}" alt="{{club.name}}"><br>
+    <img src='{{club.crestUrl}}' alt='{{club.name}}' /><br />
     <p><strong>ID :</strong> {{club.id}}</p>
     <p><strong>Shortname :</strong> {{club.shortName}}</p>
     <p><strong>TLA:</strong> {{club.tla}}</p>
     <p><strong>Address:</strong> {{club.address}}</p>
     <p><strong>Phone:</strong> {{club.phone}}</p>
-    <p><strong>Website:</strong> <a href="{{club.website}}">{{club.website}}</a></p>
+    <p><strong>Website:</strong> <a href='{{club.website}}'>{{club.website}}</a></p>
     <p><strong>Email:</strong> {{club.email}}</p>
     <p><strong>Founded:</strong> {{club.founded}}</p>
     <p><strong>Club colors:</strong> {{club.clubColors}}</p>
     <p><strong>Venue:</strong> {{club.venue}}</p>
+    <p><strong>Latitude:</strong> {{club.latitude}}</p>
+    <p><strong>Longitude:</strong> {{club.longitude}}</p>
 
-    <div id="map" style="width: 400px; height: 400px;">
+    <div id='map' style='width: 400px; height: 400px;'>
 
-      <script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: {lat: 51.5560625, lng: -0.1086381}
-        });
+     <script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: {lat: ({{club.latitude}}), lng: ({{club.longitude}})}
+    });
 
-        var marker = new google.maps.Marker({
-          position: {lat: 51.5560625, lng: -0.1086381},
-          map: map,
-          title: "{{club.name}}"
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhVsgsI5u9FHf50GT3DVZKEeF4RuzZKMo&callback=initMap" async defer></script>
+    var marker = new google.maps.Marker({
+      position: {lat: ({{club.latitude}}), lng: ({{club.longitude}})},
+      map: map,
+      title: '{{club.name}}' });
+  }
+</script>
+
+
+<script
+src =
+  'https://maps.googleapis.com/maps/api/js?key=AIzaSyDhVsgsI5u9FHf50GT3DVZKEeF4RuzZKMo&callback=initMap';
+
+  async
+  defer
+></script>
+
     </div>
 
-    
   </body>
 </html>
