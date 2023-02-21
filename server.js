@@ -150,11 +150,10 @@ app.post('/clubs/edit/:id', (req, res) => {
   });
 });
 
-// Setting up the route to process the deletion of an existing club
-app.post('/eliminar/:id', (req, res) => {
-  consoleLog(' process the deletion of an existing club');
+app.post('/delete/:id', (req, res) => {
+  consoleLog(' process the deletion of club ' + req.params.id);
 
-  const { id } = req.params;
+  const id = parseInt(req.params.id); // convert to number
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     let clubs = JSON.parse(data);

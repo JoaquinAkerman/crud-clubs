@@ -10,9 +10,13 @@
       rel='stylesheet'
       href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'
     />
+    <script>
+      function confirmDelete() { return confirm("Are you sure you want to delete the club?"); }
+    </script>
   </head>
+
   <body>
-    
+
     <h1>Club Management System</h1>
     <table>
       <thead>
@@ -32,7 +36,11 @@
             <td>
               <a href='/clubs/{{id}}'>View</a>
               <a href='/clubs/edit/{{id}}'>Edit</a>
-              <a href='/clubs/delete/{{id}}'>Delete</a>
+              <form method='post' action='/delete/{{id}}' onsubmit='return confirmDelete();'>
+                <input type='hidden' name='_method' value='DELETE' />
+                <button type='submit' class='btn btn-danger'>Delete</button>
+              </form>
+
             </td>
           </tr>
         {{/each}}
