@@ -1,10 +1,10 @@
 <h1>Edit club</h1>
 
-<form action='/clubes/edit/{{club.id}}' method='POST' enctype='multipart/form-data'>
+<form action='/clubs/edit/{{club.id}}' method='POST' >
 
   <div>
     <label for='id'>Id:</label>
-    <input type='number' id='id' name='id' value='{{club.id}}' />
+    <input type='number' id='id' name='id' value='{{club.id}}' readonly />
   </div>
 
   <div>
