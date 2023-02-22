@@ -4,15 +4,11 @@
   "description": "Create and edit clubs",
   "main": "index.js",
   "scripts": {
-    "dev:threads": "nodemon threads.js",
     "dev": "nodemon index.js",
-    "dev:express": "nodemon ./express/index-${npm_config_paso}.js",
-    "dev:template": "cd ./template-engine && nodemon --inspect index.js",
-<<<<<<< Updated upstream
-    "test": "echo \"Error: no test specified\" && exit 1"
-=======
-    "test": "jest --watchAll"
->>>>>>> Stashed changes
+    "test": "jest --collect-coverage",
+    "test-dev": "jest --watchAll",
+    "cypress:open": "cypress open",
+    "clear_jest": "jest --clearCache"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -29,6 +25,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "jest": "^29.4.3",
     "nodemon": "^2.0.20"
   },
   "author": "Joaquin",

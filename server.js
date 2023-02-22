@@ -6,9 +6,6 @@ const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
 const app = express();
 
-//import all the functions from the controller
-const clubsController = require('./controllers/clubsController');
-
 let clubsDataBase = JSON.parse(fs.readFileSync('./clubs.json', 'utf-8'));
 function consoleLog(parameter) {
   console.log(parameter + 'ejecuted ');
@@ -150,4 +147,4 @@ app.post('/eliminar/:id', (req, res) => {
   });
 });
 
-module.exports = app; // Export the app object
+module.exports = app; //export the app to be used in the test
