@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev:threads": "nodemon threads.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon index.js",
     "dev:express": "nodemon ./express/index-${npm_config_paso}.js",
     "dev:template": "cd ./template-engine && nodemon --inspect index.js",
+<<<<<<< Updated upstream
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+    "test": "jest --watchAll"
+>>>>>>> Stashed changes
   },
   "dependencies": {
     "axios": "^0.19.2",

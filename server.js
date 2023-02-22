@@ -150,8 +150,4 @@ app.post('/eliminar/:id', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server started at port ${PORT}`);
-});
+module.exports = app; // Export the app object
