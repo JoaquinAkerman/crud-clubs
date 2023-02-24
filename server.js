@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
+const multer = require('multer');
 
 const app = express();
 
@@ -26,6 +27,16 @@ function generateId(dataBase) {
   } while (checkIfIdExists(id, dataBase));
   return id; // return a unique id
 }
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads'); // here we specify the destination. In this case I created a folder called "uploads"
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname); // this is the filename being saved
+  },
+});
+const upload = multer({ storage: storage });
 
 app.engine(
   'handlebars',
@@ -163,4 +174,6 @@ app.post('/delete/:id', (req, res) => {
   });
 });
 
-module.exports = app; //export the app to be used in the test
+// code to prcoess the image
+app.post('/path', upload.single('name_of_field'), (req, res) => {});
+module.exports = app; //export the app to be used in the test and in the server

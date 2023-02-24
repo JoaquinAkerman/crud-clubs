@@ -17,7 +17,7 @@
 
   <body>
 
-    <h1>Club Management System</h1>
+    <h1 id='title'>Club Management System</h1>
     <table>
       <thead>
         <tr>
@@ -29,7 +29,7 @@
       </thead>
       <tbody>
         {{#each clubs}}
-          <tr>
+          <tr id="{{tla}}">
             <td>{{name}}</td>
             <td><img src='{{crestUrl}}' alt='{{name}}' /></td>
             <td>{{address}}</td>
