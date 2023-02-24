@@ -1,9 +1,9 @@
+const express = require('express');
+const handlebars = require('express-handlebars');
+const fs = require('fs');
+const path = require('path');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
-const express = require('express');
-const fs = require('fs');
-const handlebars = require('express-handlebars');
-const path = require('path');
 const multer = require('multer');
 
 const app = express();
@@ -176,5 +176,4 @@ app.post('/delete/:id', (req, res) => {
 
 // code to prcoess the image
 app.post('/path', upload.single('name_of_field'), (req, res) => {});
-
-module.exports = app; //export the app to be used in the test
+module.exports = app; //export the app to be used in the test and in the server

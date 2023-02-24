@@ -42,7 +42,7 @@ describe('GET /clubs/new', () => {
     expect(parseInt(response.headers['content-length'])).toBeGreaterThan(0);
   });
 
-  it('should load the correct form', async () => {
+  it('should load the new club form', async () => {
     const response = await axios.get('http://localhost:4000/clubs/new');
     const $ = cheerio.load(response.data);
     const titleText = $('#title').text().trim();
@@ -94,9 +94,40 @@ describe('GET /edit/:id', () => {
     expect(response.headers['content-type']).toBe('text/html; charset=utf-8');
     expect(response.headers['content-length']).toBeDefined();
     expect(parseInt(response.headers['content-length'])).toBeGreaterThan(0);
-    const $ = cheerio.load(response.data); //use cheerio to parse the response
+  });
+
+  it('should load the edit form', async () => {
+    const response = await axios.get('http://localhost:4000/clubs/edit/57');
+    const $ = cheerio.load(response.data);
     const titleText = $('#title').text().trim();
+    const clubName = $('input#name');
+    const shortName = $('input#shortName');
+    const tla = $('input#tla');
+    const crestUrl = $('input#crestUrl');
+    const address = $('input#address');
+    const phone = $('input#phone');
+    const website = $('input#website');
+    const email = $('input#email');
+    const founded = $('input#founded');
+    const clubColors = $('input#clubColors');
+    const venue = $('input#venue');
+    const clubColorsInput = $('input#clubColors');
+    const saveButton = $('button#save');
+
     expect(titleText).toBe('Edit club');
+    expect(clubName.length).toBeGreaterThan(0);
+    expect(shortName.length).toBeGreaterThan(0);
+    expect(tla.length).toBeGreaterThan(0);
+    expect(crestUrl.length).toBeGreaterThan(0);
+    expect(address.length).toBeGreaterThan(0);
+    expect(phone.length).toBeGreaterThan(0);
+    expect(website.length).toBeGreaterThan(0);
+    expect(email.length).toBeGreaterThan(0);
+    expect(founded.length).toBeGreaterThan(0);
+    expect(clubColors.length).toBeGreaterThan(0);
+    expect(venue.length).toBeGreaterThan(0);
+    expect(clubColorsInput.length).toBeGreaterThan(0);
+    expect(saveButton.text().trim()).toBe('Save');
   });
 });
 
