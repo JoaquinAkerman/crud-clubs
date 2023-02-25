@@ -29,9 +29,13 @@
       </thead>
       <tbody>
         {{#each clubs}}
-          <tr id='{{tla}}'>
+          <tr style='margin: top 10px; border: 1px solid grey;' id='{{tla}}'>
             <td>{{name}}</td>
-            <td><img style="max-width: 200px; max-height: 200px;" src='/public/uploads/{{id}}.png' alt='{{name}}' /></td>
+            <td><img
+                style='max-width: 200px; max-height: 200px;'
+                src='/public/uploads/{{id}}.png'
+                alt='{{name}}'
+              /></td>
             <td>{{address}}</td>
             <td>
               <a href='/clubs/{{id}}'>View</a>
@@ -40,8 +44,18 @@
                 <input type='hidden' name='delete' value='DELETE' />
                 <button type='submit' class='btn btn-danger'>Delete</button>
               </form>
-
+              <form
+                style='border: 1px solid black;'
+                action='/upload/{{id}}'
+                method='POST'
+                enctype='multipart/form-data'
+              >
+                <b>Upload club logo</b>
+                <input type='file' name='image' accept='image/*' />
+                <button type='submit' class='btn btn-secondary'>Upload logo</button>
+              </form>
             </td>
+
           </tr>
         {{/each}}
       </tbody>
