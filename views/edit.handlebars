@@ -70,7 +70,7 @@
   <button id='save' type='submit'>Save</button>
 </form>
 <br />
-<form action='/upload' method='POST' enctype='multipart/form-data'>
+<form action='/upload/{{club.id}}' method='POST' enctype='multipart/form-data'>
   <p> <b>Upload club logo</b></p>
   <input type='file' name='image' accept='image/*' />
   <button type='submit'>Upload logo</button>
