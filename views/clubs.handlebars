@@ -37,7 +37,7 @@
               <a href='/clubs/{{id}}'>View</a>
               <a href='/clubs/edit/{{id}}'>Edit</a>
               <form method='post' action='/delete/{{id}}' onsubmit='return confirmDelete();'>
-                <input type='hidden' name='_method' value='DELETE' />
+                <input type='hidden' name='delete' value='DELETE' />
                 <button type='submit' class='btn btn-danger'>Delete</button>
               </form>
 

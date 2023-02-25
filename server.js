@@ -160,20 +160,40 @@ app.post('/clubs/edit/:id', (req, res) => {
 });
 
 app.post('/delete/:id', (req, res) => {
-  consoleLog(' process the deletion of club ' + req.params.id);
-
   const id = parseInt(req.params.id); // convert to number
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     let clubs = JSON.parse(data);
     clubs = clubs.filter((c) => c.id !== id);
     fs.writeFile('clubs.json', JSON.stringify(clubs), (err) => {
+      consoleLog(' process the deletion of club ' + req.params.id);
+
       if (err) throw err;
       res.redirect('/');
     });
   });
 });
 
-// code to prcoess the image
-app.post('/path', upload.single('name_of_field'), (req, res) => {});
+// code to prcoess the upload images
+
+const storagePath = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+
+const uploadImage = multer({ storage: storagePath });
+
+app.post('/upload', uploadImage.single('image'), (req, res) => {
+  // Check if the image input is empty
+  if (!req.file) {
+    return res.status(400).send('<p>Error, invalid or missing image file</p> <a href="/">Home</a>');
+  }
+
+  res.render('upload');
+});
+
 module.exports = app; //export the app to be used in the test and in the server
