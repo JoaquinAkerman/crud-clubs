@@ -60,7 +60,7 @@ describe('GET /clubs/new', () => {
     const clubColorsInput = $('input#clubColors');
     const saveButton = $('button#save');
 
-    expect(titleText).toBe('New Club');
+    expect(titleText).toBe('New club');
     expect(clubName.length).toBeGreaterThan(0);
     expect(shortName.length).toBeGreaterThan(0);
     expect(tla.length).toBeGreaterThan(0);

@@ -1,6 +1,6 @@
-<h1 id="title">Edit club</h1>
+<h1 id='title'>Edit club</h1>
 
-<form action='/clubs/edit/{{club.id}}' method='POST' >
+<form action='/clubs/edit/{{club.id}}' method='POST'>
 
   <div>
     <label for='id'>Id:</label>
@@ -11,53 +11,61 @@
     <label for='name'>Name:</label>
     <input type='text' id='name' name='name' value='{{club.name}}' />
   </div>
+
   <div>
     <label for='shortName'>Shortname:</label>
     <input type='text' id='shortName' name='shortName' value='{{club.shortName}}' />
   </div>
+
   <div>
     <label for='tla'>TLA:</label>
     <input type='text' id='tla' name='tla' value='{{club.tla}}' />
   </div>
+
   <div>
     <label for='crestUrl'>Crest URL:</label>
     <input type='text' id='crestUrl' name='crestUrl' value='{{club.crestUrl}}' />
   </div>
+
   <div>
     <label for='address'>Address:</label>
     <input type='text' id='address' name='address' value='{{club.address}}' />
   </div>
+
   <div>
     <label for='phone'>Phone:</label>
     <input type='text' id='phone' name='phone' value='{{club.phone}}' />
   </div>
+
   <div>
     <label for='website'>Website:</label>
     <input type='text' id='website' name='website' value='{{club.website}}' />
   </div>
+
   <div>
     <label for='email'>Email:</label>
     <input type='email' id='email' name='email' value='{{club.email}}' />
   </div>
+
   <div>
     <label for='founded'>Founded:</label>
     <input type='number' id='founded' name='founded' value='{{club.founded}}' />
   </div>
+
   <div>
     <label for='clubColors'>Club colors:</label>
     <input type='text' id='clubColors' name='clubColors' value='{{club.clubColors}}' />
   </div>
+
   <div>
     <label for='venue'>Venue:</label>
     <input type='text' id='venue' name='venue' value='{{club.venue}}' />
   </div>
+
   <div>
     <label for='lastUpdated'>Last upddated:</label>
     <input type='text' id='lastUpdated' name='lastUpdated' value='{{club.lastUpdated}}' />
   </div>
-  <div>
-    <label for='logo'>Logo:</label>
-    <input type='file' id='logo' name='logo' />
-  </div>
-  <button id="save" type='submit'>Save</button>
+
+  <button id='save' type='submit'>Save</button>
 </form>

@@ -8,15 +8,11 @@ const multer = require('multer');
 
 const app = express();
 
-const clubsDataBase = JSON.parse(fs.readFileSync('./clubs.json', 'utf-8'));
+const clubsDataBase = require('./clubs.json');
 
 function checkIfIdExists(id, dataBase) {
   const club = dataBase.find((obj) => obj.id === id);
   return !!club;
-}
-
-function consoleLog(parameter) {
-  console.log(`${parameter} ejecuted `);
 }
 
 function generateId(dataBase) {
@@ -25,18 +21,8 @@ function generateId(dataBase) {
     const bytes = crypto.randomBytes(4);
     id = bytes.readUInt32BE(0).toString();
   } while (checkIfIdExists(id, dataBase));
-  return id; // return a unique id
+  return parseInt(id); // return a unique id
 }
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads'); // here we specify the destination. In this case I created a folder called "uploads"
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // this is the filename being saved
-  },
-});
-const upload = multer({ storage: storage });
 
 app.engine(
   'handlebars',
@@ -53,22 +39,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setting up the root route to display all clubs
 app.get('/', (req, res) => {
-  consoleLog(' show all clubs'),
-    fs.readFile('clubs.json', (err, data) => {
-      if (err) throw err;
-      const clubs = JSON.parse(data);
-      res.render('clubs', { clubs });
-    });
+  fs.readFile('clubs.json', (err, data) => {
+    if (err) throw err;
+    const clubs = JSON.parse(data);
+    res.render('clubs', { clubs });
+  });
 });
 
 // Setting up the route to display the form for creating a new club
 app.get('/clubs/new', (req, res) => {
-  consoleLog('create a new club');
   res.render('new');
 });
 // Setting up the route to display a particular club
 app.get('/clubs/:id', (req, res) => {
-  consoleLog(` showing club ${req.params.id}`);
   const { id } = req.params;
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
@@ -84,22 +67,33 @@ app.get('/clubs/:id', (req, res) => {
 
 // Setting up the route to display the form for editing an existing club
 app.get('/clubs/edit/:id', async (req, res) => {
-  consoleLog(`show the form for editing club ${req.params.id}`);
   try {
-    const { id } = req.params; // convert string to number
+    const { id } = req.params;
     const club = clubsDataBase.find((obj) => obj.id == id);
     res.render('edit', { club });
   } catch (err) {
-    console.error(err);
-    res.status(500).send(`error to show the form for editing club whit id${req.params.id}`);
+    res.status(500).send(`${err}`);
   }
+});
+
+// Setting up the route to display the images of each club
+
+app.get('/public/uploads/:filename', (req, res) => {
+  const { filename } = req.params;
+  res.sendFile(filename, { root: './public/uploads' }, (err) => {
+    if (err) {
+      const status = err.status || 500;
+      const body = err.message || 'Something went wrong';
+      res.status(status).send(body);
+      res.status(err.status).end();
+    }
+  });
 });
 
 /// ///////////////////POST////////////////////////
 
 // Config of the route to process the creation of a new club
 app.post('/clubs/new', (req, res) => {
-  consoleLog('process the creation of a new club');
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     const clubs = JSON.parse(data);
@@ -119,7 +113,7 @@ app.post('/clubs/new', (req, res) => {
       lastUpdated: new Date().toISOString(),
     };
     clubs.push(newClub);
-    fs.writeFile('clubs.json', JSON.stringify(clubs), (err) => {
+    fs.writeFile('clubs.json', JSON.stringify(clubs), () => {
       if (err) throw err;
       res.redirect('/');
     });
@@ -130,13 +124,12 @@ app.post('/clubs/new', (req, res) => {
 
 app.post('/clubs/edit/:id', (req, res) => {
   const { id } = req.params;
-  consoleLog(`Updating the club with id:${id}`);
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     const clubs = JSON.parse(data);
     const club = clubs.find((c) => c.id == id);
     if (club) {
-      club.id = req.body.id;
+      club.id = parseInt(req.body.id);
       club.name = req.body.name;
       club.shortName = req.body.shortName;
       club.tla = req.body.tla;
@@ -149,7 +142,7 @@ app.post('/clubs/edit/:id', (req, res) => {
       club.clubColors = req.body.clubColors;
       club.venue = req.body.venue;
       club.lastUpdated = new Date().toISOString();
-      fs.writeFile('clubs.json', JSON.stringify(clubs), (err) => {
+      fs.writeFile('clubs.json', JSON.stringify(clubs), () => {
         if (err) throw err;
         res.redirect('/');
       });
@@ -160,20 +153,40 @@ app.post('/clubs/edit/:id', (req, res) => {
 });
 
 app.post('/delete/:id', (req, res) => {
-  consoleLog(' process the deletion of club ' + req.params.id);
-
   const id = parseInt(req.params.id); // convert to number
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     let clubs = JSON.parse(data);
     clubs = clubs.filter((c) => c.id !== id);
-    fs.writeFile('clubs.json', JSON.stringify(clubs), (err) => {
-      if (err) throw err;
+
+    fs.writeFile('clubs.json', JSON.stringify(clubs), () => {
+      if (err) {
+        throw err;
+      }
       res.redirect('/');
     });
   });
 });
 
-// code to prcoess the image
-app.post('/path', upload.single('name_of_field'), (req, res) => {});
-module.exports = app; //export the app to be used in the test and in the server
+// code to prcoess the upload images
+
+const storagePath = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, './public/uploads');
+  },
+  filename(req, file, cb) {
+    cb(null, `${req.params.id}.png`);
+  },
+});
+
+const uploadImage = multer({ storage: storagePath });
+
+app.post('/upload/:id', uploadImage.single('image'), (req, res) => {
+  // Check if the image input is empty
+  if (!req.file) {
+    return res.status(400).send('<p>Error, invalid or missing image file</p> <a href="/">Home</a>');
+  }
+  return res.render('upload');
+});
+
+module.exports = app; // export the app to be used in the test and in the server
