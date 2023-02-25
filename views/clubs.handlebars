@@ -29,9 +29,9 @@
       </thead>
       <tbody>
         {{#each clubs}}
-          <tr id="{{tla}}">
+          <tr id='{{tla}}'>
             <td>{{name}}</td>
-            <td><img src='{{crestUrl}}' alt='{{name}}' /></td>
+            <td><img style="max-width: 200px; max-height: 200px;" src='/public/uploads/{{id}}.png' alt='{{name}}' /></td>
             <td>{{address}}</td>
             <td>
               <a href='/clubs/{{id}}'>View</a>

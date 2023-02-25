@@ -76,6 +76,20 @@ app.get('/clubs/edit/:id', async (req, res) => {
   }
 });
 
+// Setting up the route to display the images of each club
+
+app.get('/public/uploads/:filename', (req, res) => {
+  const { filename } = req.params;
+  res.sendFile(filename, { root: './public/uploads' }, (err) => {
+    if (err) {
+      const status = err.status || 500;
+      const body = err.message || 'Something went wrong';
+      res.status(status).send(body);
+      res.status(err.status).end();
+    }
+  });
+});
+
 /// ///////////////////POST////////////////////////
 
 // Config of the route to process the creation of a new club
