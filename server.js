@@ -3,26 +3,11 @@ const handlebars = require('express-handlebars');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
-const crypto = require('crypto');
 const multer = require('multer');
 
 const app = express();
-
 const clubsDataBase = require('./clubs.json');
-
-function checkIfIdExists(id, dataBase) {
-  const club = dataBase.find((obj) => obj.id === id);
-  return !!club;
-}
-
-function generateId(dataBase) {
-  let id;
-  do {
-    const bytes = crypto.randomBytes(4);
-    id = bytes.readUInt32BE(0).toString();
-  } while (checkIfIdExists(id, dataBase));
-  return parseInt(id); // return a unique id
-}
+const { generateId } = require('./modules/idServices');
 
 app.engine(
   'handlebars',
@@ -50,6 +35,7 @@ app.get('/', (req, res) => {
 app.get('/clubs/new', (req, res) => {
   res.render('new');
 });
+
 // Setting up the route to display a particular club
 app.get('/clubs/:id', (req, res) => {
   const { id } = req.params;
@@ -77,7 +63,6 @@ app.get('/clubs/edit/:id', async (req, res) => {
 });
 
 // Setting up the route to display the images of each club
-
 app.get('/public/uploads/:filename', (req, res) => {
   const { filename } = req.params;
   res.sendFile(filename, { root: './public/uploads' }, (err) => {
@@ -153,7 +138,7 @@ app.post('/clubs/edit/:id', (req, res) => {
 });
 
 app.post('/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id); // convert to number
+  const id = parseInt(req.params.id);
   fs.readFile('clubs.json', (err, data) => {
     if (err) throw err;
     let clubs = JSON.parse(data);
@@ -171,10 +156,12 @@ app.post('/delete/:id', (req, res) => {
 // code to prcoess the upload images
 
 const storagePath = multer.diskStorage({
+  // set the storage path
   destination(req, file, cb) {
     cb(null, './public/uploads');
   },
   filename(req, file, cb) {
+    // set the file name
     cb(null, `${req.params.id}.png`);
   },
 });
@@ -184,9 +171,24 @@ const uploadImage = multer({ storage: storagePath });
 app.post('/upload/:id', uploadImage.single('image'), (req, res) => {
   // Check if the image input is empty
   if (!req.file) {
-    return res.status(400).send('<p>Error, invalid or missing image file</p> <a href="/">Home</a>');
+    res.status(400).render('processStatus', { message: 'Error, invalid or missing image file' });
   }
-  return res.render('upload');
+  // if not empty, send the success message
+  return res.status(200).render('processStatus', { message: 'Image uploaded successfully' });
+});
+
+// code to process the reset of the clubs
+app.post('/reset-clubs', (req, res) => {
+  const pathbackupClubs = './backupClubs/backupClubs.json';
+  const pathClubsDataBase = './clubs.json';
+  try {
+    const backupData = fs.readFileSync(pathbackupClubs);
+    fs.writeFileSync(pathClubsDataBase, backupData);
+    res.status(200).render('processStatus', { message: 'Clubs reset successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('processStatus', { message: 'Internal server error' });
+  }
 });
 
 module.exports = app; // export the app to be used in the test and in the server

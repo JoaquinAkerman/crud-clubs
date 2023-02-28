@@ -8,7 +8,7 @@ module.exports = {
   rules: {
     'no-console': 'warn',
     'no-unused-vars': 'warn',
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': ['error', 'windows'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     radix: 'off',
