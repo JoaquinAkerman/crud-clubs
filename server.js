@@ -63,7 +63,7 @@ app.get('/clubs/edit/:id', async (req, res) => {
 });
 
 // Setting up the route to display the images of each club
-app.get('/public/uploads/:filename', (req, res) => {
+app.get('/clubs/public/uploads/:filename', (req, res) => {
   const { filename } = req.params;
   res.sendFile(filename, { root: './public/uploads' }, (err) => {
     if (err) {
