@@ -1,4 +1,4 @@
-# Croud Clubes
+# Croud Clubs
 
 "Croud Clubes" is a web application built with Express and Handlebars that allows users to view, create, and edit clubs based on their interests. With this application, users can easily discover new clubs, modify existing ones, and create their own clubs.
 
