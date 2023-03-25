@@ -2,6 +2,19 @@
   <head>
     <meta charset='utf-8' />
     <title>{{club.name}}</title>
+    <script>
+        function initMap() { var map = new google.maps.Map(document.getElementById('map'), { zoom:
+        16, center: {lat: ({{club.latitude}}), lng: ({{club.longitude}})} }); var marker = new
+        google.maps.Marker({ position: {lat: ({{club.latitude}}), lng: ({{club.longitude}})}, map:
+        map, title: '{{club.name}}' }); }
+      </script>
+
+      <script
+        src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDhVsgsI5u9FHf50GT3DVZKEeF4RuzZKMo&callback=initMap'
+        ;
+        async
+        defer
+      ></script>
   </head>
   <body>
     <h1>{{club.name}}</h1>
@@ -26,19 +39,7 @@
 
     <div id='map' style='width: 400px; height: 400px;'>
 
-      <script>
-        function initMap() { var map = new google.maps.Map(document.getElementById('map'), { zoom:
-        16, center: {lat: ({{club.latitude}}), lng: ({{club.longitude}})} }); var marker = new
-        google.maps.Marker({ position: {lat: ({{club.latitude}}), lng: ({{club.longitude}})}, map:
-        map, title: '{{club.name}}' }); }
-      </script>
-
-      <script
-        src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDhVsgsI5u9FHf50GT3DVZKEeF4RuzZKMo&callback=initMap'
-        ;
-        async
-        defer
-      ></script>
+      
 
     </div>
 

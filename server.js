@@ -65,7 +65,7 @@ app.get('/clubs/edit/:id', async (req, res) => {
 // Setting up the route to display the images of each club
 app.get('/public/static/:filename', (req, res) => {
   const { filename } = req.params;
-  res.sendFile(filename, { root: './public/uploads' }, (err) => {
+  res.sendFile(filename, { root: './public/static' }, (err) => {
     if (err) {
       const status = err.status || 500;
       const body = err.message || 'Something went wrong';
@@ -158,7 +158,7 @@ app.post('/delete/:id', (req, res) => {
 const storagePath = multer.diskStorage({
   // set the storage path
   destination(req, file, cb) {
-    cb(null, './public/uploads');
+    cb(null, './public/static');
   },
   filename(req, file, cb) {
     // set the file name
