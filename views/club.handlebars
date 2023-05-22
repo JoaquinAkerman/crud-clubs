@@ -2,10 +2,28 @@
   <head>
     <meta charset='utf-8' />
     <title>{{club.name}}</title>
+    <script>
+        function initMap() { var map = new google.maps.Map(document.getElementById('map'), { zoom:
+        16, center: {lat: ({{club.latitude}}), lng: ({{club.longitude}})} }); var marker = new
+        google.maps.Marker({ position: {lat: ({{club.latitude}}), lng: ({{club.longitude}})}, map:
+        map, title: '{{club.name}}' }); }
+      </script>
+
+      <script
+        src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDhVsgsI5u9FHf50GT3DVZKEeF4RuzZKMo&callback=initMap'
+        ;
+        async
+        defer
+      ></script>
   </head>
   <body>
     <h1>{{club.name}}</h1>
-    <img src='{{club.crestUrl}}' alt='{{club.name}}' /><br />
+    <img
+      src='/public/static/images/{{club.id}}.png'
+      alt='{{club.name}}'
+      style='max-width: 200px; max-height: 200px;'
+    />
+    <br />
     <p><strong>ID :</strong> {{club.id}}</p>
     <p><strong>Shortname :</strong> {{club.shortName}}</p>
     <p><strong>TLA:</strong> {{club.tla}}</p>
@@ -21,28 +39,7 @@
 
     <div id='map' style='width: 400px; height: 400px;'>
 
-     <script>
-  function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 16,
-      center: {lat: ({{club.latitude}}), lng: ({{club.longitude}})}
-    });
-
-    var marker = new google.maps.Marker({
-      position: {lat: ({{club.latitude}}), lng: ({{club.longitude}})},
-      map: map,
-      title: '{{club.name}}' });
-  }
-</script>
-
-
-<script
-src =
-  'https://maps.googleapis.com/maps/api/js?key=AIzaSyDhVsgsI5u9FHf50GT3DVZKEeF4RuzZKMo&callback=initMap';
-
-  async
-  defer
-></script>
+      
 
     </div>
 
