@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "builds": [
+  "builds": [{ "src": "server.js", "use": "@vercel/node" }],
+  "routes": [
     {
-      "src": "./index.js",
-      "use": "@vercel/node"
+      "src": "/public/static/images/(.*)",
+      "dest": "https://raw.githubusercontent.com/JoaquinAkerman/crud-clubs/main/public/static/images/$1"
     }
   ]
 }
