@@ -1,10 +1,19 @@
+
 {
   "version": 2,
   "builds": [{ "src": "server.js", "use": "@vercel/node" }],
   "routes": [
+    { "src": "/", "dest": "server.js" },
+    { "src": "/:id", "dest": "server.js" },
     {
       "src": "/public/static/images/(.*)",
-      "dest": "https://raw.githubusercontent.com/JoaquinAkerman/crud-clubs/main/public/static/images/$1"
-    }
+      "dest": "https://raw.githubusercontent.com/JoaquinAkerman/crud/main/public/static/images/$1"
+    },
+    { "src": "/new", "dest": "server.js" },
+    { "src": "/edit/:id", "dest": "server.js" },
+    { "src": "/delete/:id", "dest": "server.js" },
+    { "src": "/upload/:id", "dest": "server.js" },
+    { "src": "/reset", "dest": "server.js" },
+    { "src": "/(.*)", "dest": "server.js" }
   ]
 }
